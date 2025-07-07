@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Manajemen Keuangan</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Manajemen Keuangan</h1>
+      <h2>Saldo: <span th:text="${balance}" class="balance">0</span></h2>
+
+      <h3>Tambah Transaksi</h3>
+      <form action="/add" method="post">
+        <label for="desc">Deskripsi:</label>
+        <input id="desc" type="text" name="description" required />
+
+        <label for="amount">Jumlah:</label>
+        <input id="amount" type="number" step="any" name="amount" required />
+
+        <label for="type">Tipe:</label>
+        <select id="type" name="type">
+          <option value="income">Pemasukan</option>
+          <option value="expense">Pengeluaran</option>
+        </select>
+
+        <button type="submit">Tambah</button>
+      </form>
+
+      <h3>Daftar Transaksi</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Deskripsi</th>
+            <th>Jumlah</th>
+            <th>Tipe</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="t : ${transactions}">
+            <td th:text="${t.id}"></td>
+            <td th:text="${t.description}"></td>
+            <td th:text="${#numbers.formatDecimal(t.amount, 0, 'COMMA', 2, 'POINT')}"></td>
+            <td th:text="${t.type}"></td>
+            <td>
+              <a th:href="@{'/edit/' + ${t.id}}" class="edit-button">Edit</a>
+              <a th:href="@{'/delete/' + ${t.id}}" class="delete-button">Hapus</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
