@@ -1,0 +1,5 @@
+com\adit\keuangan\model\Transaction.class
+com\adit\keuangan\service\TransactionService.class
+com\adit\keuangan\repository\TransactionRepository.class
+com\adit\keuangan\controller\ViewController.class
+com\adit\keuangan\ManajemenKeuanganSpringApplication.class
